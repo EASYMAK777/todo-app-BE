@@ -1,0 +1,21 @@
+// This is your Prisma schema file
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Task {
+  id        Int      @id @default(autoincrement())
+  title     String   @db.VarChar(255)
+  color     String   @db.VarChar(7)  // For hex color codes like #FF0000
+  completed Boolean  @default(false)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("tasks")
+} 
